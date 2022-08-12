@@ -14,6 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   bloc: ^8.1.0
   flutter_bloc: ^8.0.1
+  equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -30,9 +31,7 @@ flutter:
  
   assets:
     - assets/images/home_background.png
-    - assets/images/menu_icon.png
     - assets/images/search_image.png
-    - assets/images/search_page_background.png
     - assets/images/saved_icon.png
     - assets/images/fav_icon.png
     - assets/images/home_icon.png
