@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SearchedCodesWidget extends StatelessWidget {
-  const SearchedCodesWidget() : super();
+  const SearchedCodesWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container(
@@ -22,6 +22,8 @@ class SearchedCodesWidget extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/images/search_image.png',
+                width: 52.0,
+                height: 52.0,
                 color: const Color(0xFFB4A5FD),
               ),
               Expanded(
@@ -39,7 +41,7 @@ class SearchedCodesWidget extends StatelessWidget {
                           text: '535',
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            fontSize: 60.0,
+                            fontSize: 55.0,
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
                           ),
@@ -49,7 +51,7 @@ class SearchedCodesWidget extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w200,
-                            fontSize: 16.0,
+                            fontSize: 14.0,
                             color: Colors.white,
                           ),
                         ),

@@ -49,7 +49,7 @@ class SavedCodesWidget extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.only(right: 25.0),
                   child: CircleAvatar(
-                    radius: 18,
+                    radius: 14,
                     backgroundColor: Color(
                       0xFF7B61FF,
                     ),
@@ -58,7 +58,6 @@ class SavedCodesWidget extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 18.0,
-                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ),

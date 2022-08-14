@@ -1,5 +1,6 @@
 import 'package:cep_finder/bloc/navigation/navigation_cubit.dart';
 import 'package:cep_finder/bloc/navigation/navigation_state.dart';
+import 'package:cep_finder/bloc/search/search_cubit.dart';
 import 'package:cep_finder/pages/favorites/favorites_page.dart';
 import 'package:cep_finder/pages/home/home_page.dart';
 import 'package:cep_finder/pages/search/search_page.dart';
@@ -30,7 +31,6 @@ class _MainState extends State<MainPage> {
   Widget _builder(BuildContext context, NavigationState state) {
     return Scaffold(
       body: SafeArea(
-        top: state.currentIndex == 1,
         child: _getPage(state.currentIndex),
       ),
       bottomNavigationBar: _makeBottomBar(state.currentIndex),
@@ -42,7 +42,10 @@ class _MainState extends State<MainPage> {
       case 0:
         return const HomePage();
       case 1:
-        return const SearchPage();
+        return BlocProvider<SearchCubit>(
+          create: (context) => SearchCubit(),
+          child: const SearchPage(),
+        );
       case 2:
         return const FavoritesPage();
 
@@ -56,6 +59,8 @@ class _MainState extends State<MainPage> {
         onTap: (index) => cubit.changeIndex(
           index: index,
         ),
+        selectedIconTheme: const IconThemeData(size: 26.0),
+        unselectedIconTheme: const IconThemeData(size: 24.0),
         selectedLabelStyle: const TextStyle(
           fontFamily: 'Poppins',
         ),

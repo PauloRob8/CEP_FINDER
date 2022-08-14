@@ -18,34 +18,29 @@ class _HomeState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: const Color(0xFFFFFFFF),
-        body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) => SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: constraints.maxWidth,
-                    height: 620.0,
-                    child: Stack(
-                      children: [
-                        _makeImageBackground(),
-                        _makeWelcomeText(),
-                        const Align(
-                          alignment: Alignment.bottomCenter,
-                          child: SearchedCodesWidget(),
-                        ),
-                      ],
+  Widget build(BuildContext context) => LayoutBuilder(
+        builder: (context, constraints) => SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                width: constraints.maxWidth,
+                height: 620.0,
+                child: Stack(
+                  children: [
+                    _makeImageBackground(),
+                    _makeWelcomeText(),
+                    const Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SearchedCodesWidget(),
                     ),
-                  ),
-                  const Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SavedCodesWidget(),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+              const Align(
+                alignment: Alignment.bottomCenter,
+                child: SavedCodesWidget(),
+              ),
+            ],
           ),
         ),
       );

@@ -4,7 +4,7 @@ description: A app to search ZIP codes and save addresses.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 
 dependencies:
@@ -12,14 +12,27 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  bloc: ^8.1.0
+
+  #To show done button for numeric keyboards
+  keyboard_actions: ^4.0.1
+
+  #local storate
+  shared_preferences: ^2.0.15
+  
+  #Bloc for state management
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
+
+  #For create mocks for tests
+  mockito: ^5.3.0
+
+  # API requests
+  http: ^0.13.5
+ 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
   flutter_lints: ^2.0.0
 
@@ -35,6 +48,7 @@ flutter:
     - assets/images/saved_icon.png
     - assets/images/fav_icon.png
     - assets/images/home_icon.png
+    - assets/images/search_icon.png
   fonts:
     - family: Poppins
       fonts:
