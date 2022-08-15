@@ -1,4 +1,4 @@
-import 'package:cep_finder/bloc/search/search_state.dart';
+import 'package:cep_finder/business/search/search_state.dart';
 import 'package:cep_finder/data/address_model.dart';
 import 'package:cep_finder/data/request_cep_api.dart';
 import 'package:cep_finder/data/shared_preferences_keys.dart';

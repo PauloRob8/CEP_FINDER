@@ -1,8 +1,8 @@
-import 'package:cep_finder/bloc/favorites/favorites_cubit.dart';
-import 'package:cep_finder/bloc/home/home_cubit.dart';
-import 'package:cep_finder/bloc/navigation/navigation_cubit.dart';
-import 'package:cep_finder/bloc/navigation/navigation_state.dart';
-import 'package:cep_finder/bloc/search/search_cubit.dart';
+import 'package:cep_finder/business/favorites/favorites_cubit.dart';
+import 'package:cep_finder/business/home/home_cubit.dart';
+import 'package:cep_finder/business/navigation/navigation_cubit.dart';
+import 'package:cep_finder/business/navigation/navigation_state.dart';
+import 'package:cep_finder/business/search/search_cubit.dart';
 import 'package:cep_finder/pages/favorites/favorites_page.dart';
 import 'package:cep_finder/pages/home/home_page.dart';
 import 'package:cep_finder/pages/search/search_page.dart';

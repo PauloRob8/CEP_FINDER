@@ -1,5 +1,5 @@
-import 'package:cep_finder/bloc/home/home_cubit.dart';
-import 'package:cep_finder/bloc/home/home_state.dart';
+import 'package:cep_finder/business/home/home_cubit.dart';
+import 'package:cep_finder/business/home/home_state.dart';
 import 'package:cep_finder/pages/home/widgets/saved_codes_widget.dart';
 import 'package:cep_finder/pages/home/widgets/searched_codes_widget.dart';
 import 'package:flutter/material.dart';

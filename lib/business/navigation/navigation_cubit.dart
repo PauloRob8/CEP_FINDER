@@ -1,4 +1,4 @@
-import 'package:cep_finder/bloc/navigation/navigation_state.dart';
+import 'package:cep_finder/business/navigation/navigation_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NavigationCubit extends Cubit<NavigationState> {

@@ -1,5 +1,5 @@
-import 'package:cep_finder/bloc/search/search_cubit.dart';
-import 'package:cep_finder/bloc/search/search_state.dart';
+import 'package:cep_finder/business/search/search_cubit.dart';
+import 'package:cep_finder/business/search/search_state.dart';
 import 'package:cep_finder/data/address_model.dart';
 import 'package:cep_finder/pages/search/widgets/add_to_favorites_button.dart';
 import 'package:cep_finder/utills/cep_formatter.dart';

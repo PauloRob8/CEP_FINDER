@@ -1,4 +1,4 @@
-import 'package:cep_finder/bloc/navigation/navigation_cubit.dart';
+import 'package:cep_finder/business/navigation/navigation_cubit.dart';
 import 'package:cep_finder/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

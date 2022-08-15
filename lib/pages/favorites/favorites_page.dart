@@ -1,5 +1,5 @@
-import 'package:cep_finder/bloc/favorites/favorites_cubit.dart';
-import 'package:cep_finder/bloc/favorites/favorites_state.dart';
+import 'package:cep_finder/business/favorites/favorites_cubit.dart';
+import 'package:cep_finder/business/favorites/favorites_state.dart';
 import 'package:cep_finder/pages/favorites/widgets/address_list_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

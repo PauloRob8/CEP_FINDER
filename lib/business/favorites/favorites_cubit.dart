@@ -1,4 +1,4 @@
-import 'package:cep_finder/bloc/favorites/favorites_state.dart';
+import 'package:cep_finder/business/favorites/favorites_state.dart';
 import 'package:cep_finder/data/address_model.dart';
 import 'package:cep_finder/data/shared_preferences_keys.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
