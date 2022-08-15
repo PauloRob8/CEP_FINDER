@@ -20,11 +20,6 @@ class _MainState extends State<MainPage> {
   NavigationCubit get cubit => context.read<NavigationCubit>();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) =>
       BlocBuilder<NavigationCubit, NavigationState>(
         builder: _builder,
