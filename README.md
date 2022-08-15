@@ -4,7 +4,7 @@ A cep finder app using [ViaCep](https://viacep.com.br/) API
 
 ## Getting Started
 
-Download the apk-release.apk file for run on Android Devices
+Download the app-release.apk file for run on Android Devices
 
 
 ## The app
