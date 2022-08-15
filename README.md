@@ -1,16 +1,21 @@
-# cep_finder
+# Cep Finder
 
-A new Flutter project.
+A cep finder app using [ViaCep](https://viacep.com.br/) API
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Download the APK file for run on Android Devices
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## The app
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+### Packages used
+[FlutterBloc](https://pub.dev/packages/flutter_bloc) and [Equatable](https://pub.dev/packages/equatable) for state management and architecture
+
+
+[Http](https://pub.dev/packages/http) for network requests
+
+
+[SharedPreferences](https://pub.dev/packages/shared_preferences) for local storage
