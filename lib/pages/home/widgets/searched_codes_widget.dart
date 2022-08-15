@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SearchedCodesWidget extends StatelessWidget {
-  const SearchedCodesWidget({Key? key}) : super(key: key);
+  const SearchedCodesWidget({
+    required this.searchedCeps,
+    Key? key,
+  }) : super(key: key);
+
+  final int searchedCeps;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -35,18 +40,18 @@ class SearchedCodesWidget extends StatelessWidget {
                   ),
                   child: RichText(
                     textAlign: TextAlign.center,
-                    text: const TextSpan(
+                    text: TextSpan(
                       children: [
                         TextSpan(
-                          text: '535',
-                          style: TextStyle(
+                          text: searchedCeps.toString(),
+                          style: const TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 55.0,
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        TextSpan(
+                        const TextSpan(
                           text: '\nCEPs pesquisados',
                           style: TextStyle(
                             fontFamily: 'Poppins',

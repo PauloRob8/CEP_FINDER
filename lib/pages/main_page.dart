@@ -1,3 +1,5 @@
+import 'package:cep_finder/bloc/favorites/favorites_cubit.dart';
+import 'package:cep_finder/bloc/home/home_cubit.dart';
 import 'package:cep_finder/bloc/navigation/navigation_cubit.dart';
 import 'package:cep_finder/bloc/navigation/navigation_state.dart';
 import 'package:cep_finder/bloc/search/search_cubit.dart';
@@ -40,17 +42,26 @@ class _MainState extends State<MainPage> {
   Widget _getPage(int index) {
     switch (index) {
       case 0:
-        return const HomePage();
+        return BlocProvider<HomeCubit>(
+          create: (context) => HomeCubit()..getSavedData(),
+          child: const HomePage(),
+        );
       case 1:
         return BlocProvider<SearchCubit>(
           create: (context) => SearchCubit(),
           child: const SearchPage(),
         );
       case 2:
-        return const FavoritesPage();
+        return BlocProvider<FavoritesCubit>(
+          create: (context) => FavoritesCubit()..getFavoritesAddresses(),
+          child: const FavoritesPage(),
+        );
 
       default:
-        return const HomePage();
+        return BlocProvider<HomeCubit>(
+          create: (context) => HomeCubit()..getSavedData(),
+          child: const HomePage(),
+        );
     }
   }
 

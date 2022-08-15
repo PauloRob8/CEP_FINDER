@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SavedCodesWidget extends StatelessWidget {
-  const SavedCodesWidget({Key? key}) : super(key: key);
+  const SavedCodesWidget({
+    required this.savedCounter,
+    Key? key,
+  }) : super(key: key);
+
+  final int savedCounter;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -46,16 +51,16 @@ class SavedCodesWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 25.0),
+                Padding(
+                  padding: const EdgeInsets.only(right: 25.0),
                   child: CircleAvatar(
                     radius: 14,
-                    backgroundColor: Color(
+                    backgroundColor: const Color(
                       0xFF7B61FF,
                     ),
                     child: Text(
-                      '3',
-                      style: TextStyle(
+                      savedCounter.toString(),
+                      style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 18.0,
                       ),

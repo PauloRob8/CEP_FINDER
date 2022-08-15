@@ -1,6 +1,9 @@
+import 'package:cep_finder/bloc/home/home_cubit.dart';
+import 'package:cep_finder/bloc/home/home_state.dart';
 import 'package:cep_finder/pages/home/widgets/saved_codes_widget.dart';
 import 'package:cep_finder/pages/home/widgets/searched_codes_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,37 +13,38 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomeState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-
-    //
-  }
+  HomeCubit get cubit => context.read<HomeCubit>();
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
         builder: (context, constraints) => SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                width: constraints.maxWidth,
-                height: 620.0,
-                child: Stack(
-                  children: [
-                    _makeImageBackground(),
-                    _makeWelcomeText(),
-                    const Align(
-                      alignment: Alignment.bottomCenter,
-                      child: SearchedCodesWidget(),
-                    ),
-                  ],
+          child: BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) => Column(
+              children: [
+                SizedBox(
+                  width: constraints.maxWidth,
+                  height: 620.0,
+                  child: Stack(
+                    children: [
+                      _makeImageBackground(),
+                      _makeWelcomeText(),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: SearchedCodesWidget(
+                          searchedCeps: state.searchedCeps,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const Align(
-                alignment: Alignment.bottomCenter,
-                child: SavedCodesWidget(),
-              ),
-            ],
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SavedCodesWidget(
+                    savedCounter: state.savedCounter,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
