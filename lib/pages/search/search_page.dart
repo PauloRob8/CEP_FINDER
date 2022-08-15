@@ -1,5 +1,7 @@
 import 'package:cep_finder/bloc/search/search_cubit.dart';
 import 'package:cep_finder/bloc/search/search_state.dart';
+import 'package:cep_finder/data/address_model.dart';
+import 'package:cep_finder/pages/search/widgets/add_to_favorites_button.dart';
 import 'package:cep_finder/utills/cep_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,27 +29,78 @@ class _SearchState extends State<SearchPage> {
   }
 
   @override
-  Widget build(BuildContext context) => KeyboardActions(
-        disableScroll: true,
-        autoScroll: false,
-        config: _keyboardConfig(),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _makeHeader(),
-              const SizedBox(
-                height: 120.0,
-              ),
-              _makeAddressInfoColumn(),
-              const SizedBox(
-                height: 35.0,
-              ),
-              _makeAddToFavoritesButton(),
-            ],
+  Widget build(BuildContext context) => BlocConsumer<SearchCubit, SearchState>(
+        listener: _listener,
+        builder: _builder,
+      );
+
+  void _listener(BuildContext context, SearchState state) {
+    if (state.error == ErrorType.alreadyAdded) {
+      _cepTextController.text = '';
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Você já adicionou esse endereço aos favoritos!',
           ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Color(0xFF6D51FF),
         ),
       );
+    } else if (state.error == ErrorType.alreadyAdded) {
+      _cepTextController.text = '';
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Ocorreu um erro ao adicionar o endereço.',
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } else if (state.addedToFavorites) {
+      _cepTextController.text = '';
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Endereço adicionado aos favoritos com sucesso',
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Color(0xFF6D51FF),
+        ),
+      );
+    }
+  }
+
+  Widget _builder(BuildContext context, SearchState state) {
+    return KeyboardActions(
+      disableScroll: true,
+      autoScroll: false,
+      config: _keyboardConfig(),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _makeHeader(),
+            const SizedBox(
+              height: 120.0,
+            ),
+            _makeAddressInfoColumn(state),
+            const SizedBox(
+              height: 35.0,
+            ),
+            AddToFavoritesButton(
+              addressModel: state.addressModel,
+              onTap: () {
+                cubit.addToFavorites(
+                  addressModel: state.addressModel,
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   KeyboardActionsConfig _keyboardConfig() => KeyboardActionsConfig(
         nextFocus: false,
@@ -144,7 +197,7 @@ class _SearchState extends State<SearchPage> {
         ),
       );
 
-  Widget _makeAddressInfoColumn() => Padding(
+  Widget _makeAddressInfoColumn(SearchState state) => Padding(
         padding: const EdgeInsets.only(left: 15.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,39 +214,43 @@ class _SearchState extends State<SearchPage> {
                 ),
               ),
             ),
-            _makeAddressData(),
+            _makeAddressData(state),
           ],
         ),
       );
 
-  Widget _makeAddressData() => BlocBuilder<SearchCubit, SearchState>(
-        builder: (context, state) {
-          if (state.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: Color(0xFF6D51FF),
-              ),
-            );
-          } else if (state.errorOnRequest) {
-            return _makeAddressText(
-              'Ops, o CEP digitado não foi encontrado, verifique e tente novamente.',
-              true,
-            );
-          } else if (state.addressModel != null) {
-            return _makeAddressText(
-              '${state.addressModel!.street} - ${state.addressModel!.complement} '
-              '${state.addressModel!.neighborhood} - '
-              '${state.addressModel!.city} ${state.addressModel!.state} - '
-              'CEP ${state.addressModel!.cep}',
-              false,
-            );
-          }
-          return _makeAddressText(
-            'As informações do seu CEP apareceram aqui.',
-            false,
-          );
-        },
+  Widget _makeAddressData(SearchState state) {
+    if (state.isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: Color(0xFF6D51FF),
+        ),
       );
+    } else if (state.error == ErrorType.requestError) {
+      return _makeAddressText(
+        'Não conseguimos localizar seu endereço, verifique se as informações passadas estão corretas.',
+        true,
+      );
+    } else if (state.addressModel != null) {
+      return _makeAddressText(
+        _makeAddressInfoText(state.addressModel),
+        false,
+      );
+    }
+    return _makeAddressText(
+      'As informações do seu CEP apareceram aqui.',
+      false,
+    );
+  }
+
+  String _makeAddressInfoText(AddressModel? address) {
+    if (address!.street.isEmpty) {
+      return '${address.city} ${address.state} - CEP ${address.cep}';
+    } else {
+      return '${address.street} - ${address.neighborhood} ${address.complement}'
+          ' - ${address.city} ${address.state} - CEP ${address.cep}';
+    }
+  }
 
   Padding _makeAddressText(String text, bool errorText) => Padding(
         padding: const EdgeInsets.only(
@@ -208,46 +265,6 @@ class _SearchState extends State<SearchPage> {
             fontFamily: 'Poppins',
             fontSize: 15.0,
             color: errorText ? Colors.red : Colors.black,
-          ),
-        ),
-      );
-
-  Widget _makeAddToFavoritesButton() => GestureDetector(
-        onTap: () {},
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: SizedBox(
-            height: 55.0,
-            child: Card(
-              color: const Color(0xff2E179D),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(
-                    40.0,
-                  ),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: ImageIcon(
-                      AssetImage('assets/images/fav_icon.png'),
-                      color: Colors.white,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      'Adicionar aos favoritos',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14.0,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ),
         ),
       );

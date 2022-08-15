@@ -49,6 +49,10 @@ flutter:
     - assets/images/fav_icon.png
     - assets/images/home_icon.png
     - assets/images/search_icon.png
+    - assets/images/fav_image.png
+    - assets/images/star_icon.png
+    - assets/images/delete_icon.png
+
   fonts:
     - family: Poppins
       fonts:
